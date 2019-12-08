@@ -6,4 +6,4 @@
 
 ## 使用 goland 实现graph
 
-[](https://github.com/ClareChu/go-collection/tree/master/src/mgraph)
+[图(graph)](https://github.com/ClareChu/go-collection/tree/master/src/mgraph)
