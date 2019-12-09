@@ -1,12 +1,6 @@
 package src
 
-const (
-	/**
-	 * Default initial capacity.
-	 */
-
-	DEFAULT_CAPACITY int = 10
-)
+import "errors"
 
 type ArrayListInterface interface {
 	Collection
@@ -33,6 +27,7 @@ func (a *ArrayList) Add(o interface{}) bool {
 func (a *ArrayList) Remove(index int) bool {
 	if a.size >= index {
 		a.ElementData = append(a.ElementData[:index], a.ElementData[index:]...)
+		a.size--
 		return true
 	} else if a.size < index {
 		return false
@@ -41,7 +36,43 @@ func (a *ArrayList) Remove(index int) bool {
 	}
 }
 
-func (a *ArrayList) RemoveObject(index int) bool {
+func (a *ArrayList) RemoveObject(o interface{}) (err error) {
+	if o == nil {
+		return errors.New("remove object is nil")
+	} else {
+		for i := 0; i < a.size; i++ {
+			if o == a.ElementData[i] {
+				a.ElementData = append(a.ElementData[:i], a.ElementData[i:]...)
+				a.size--
+				i--
+			}
+		}
+	}
+
+	return errors.New("run time is error")
+}
+
+func (a *ArrayList) IsEmpty() bool {
+	return a.size == 0
+}
+
+func (a *ArrayList) Size() int {
+	return a.size
+}
+
+func (a *ArrayList) Contains(value interface{}) bool {
+	for _, curValue := range a.ElementData {
+		if curValue == value {
+			return true
+		}
+	}
 
 	return false
+}
+
+func (a *ArrayList) Get(index int) interface{} {
+	if index < 0 || index >= a.size {
+		return nil
+	}
+	return a.ElementData[index]
 }

@@ -1,6 +1,6 @@
-package dfs
+package algraph
 
-import "github.com/ClareChu/collection/src/mgraph"
+import "github.com/ClareChu/collection/src/graph/mgraph"
 
 const MAX = 10
 
