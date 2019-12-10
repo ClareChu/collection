@@ -1,4 +1,4 @@
-package src
+package collection
 
 import "errors"
 
@@ -218,7 +218,7 @@ func (link *LinkedList) checkElementIndex(index int) error {
 }
 
 func (link *LinkedList) isElementIndex(index int) bool {
-	if index >= 0 || index < link.size {
+	if index >= 0 && index < link.size {
 		return true
 	}
 	return false
@@ -255,7 +255,7 @@ func (link *LinkedList) AddIndex(index int, element interface{}) (err error) {
 	}
 	return nil
 }
-func (link *LinkedList)  linkBefore(element interface{}, node *Node) {
+func (link *LinkedList) linkBefore(element interface{}, node *Node) {
 	prev := node.prev
 	newNode := NewNode(prev, element, node)
 	if prev == nil {
