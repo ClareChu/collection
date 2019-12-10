@@ -4,6 +4,9 @@
   <a href="https://travis-ci.org/ClareChu/go-collection?branch=master">
     <img src="https://travis-ci.org/ClareChu/go-collection.svg?branch=master" alt="Build Status"/>
   </a>
+  <a href="https://codecov.io/gh/ClareChu/go-collection">
+    <img src="https://codecov.io/gh/ClareChu/go-collection/branch/master/graph/badge.svg" />
+  </a>
 </p>
 
 #### 主要做了哪些内容
