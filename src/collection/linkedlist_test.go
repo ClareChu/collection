@@ -45,18 +45,3 @@ func TestLinkedList_Contains(t *testing.T) {
 	b = link.Contains(1)
 	assert.Equal(t, true, b)
 }
-
-
-func TestLinkedList_AddIndex1(t *testing.T) {
-	link := NewLinkedList()
-	err := link.AddIndex(2, 1)
-	assert.Equal(t, nil, err)
-
-
-	err = link.Add(1)
-	assert.Equal(t, nil, err)
-
-	err = link.AddIndex(0, 2)
-	assert.Equal(t, nil, err)
-}
-
