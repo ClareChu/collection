@@ -1,7 +1,7 @@
 # go-collection
 
 <p align="center">
-  <a href="https://travis-ci.org/hidevopsio/cube?branch=master">
+  <a href="https://travis-ci.org/ClareChu/go-collection?branch=master">
     <img src="https://travis-ci.org/ClareChu/go-collection.svg?branch=master" alt="Build Status"/>
   </a>
 </p>
