@@ -10,13 +10,14 @@ type LinkedListInterface interface {
 	GetLast() (item interface{}, err error)
 	linkBefore(element interface{}, node *Node)
 	node(index int) (node *Node)
-	isElementIndex(index int) bool
+	IsElementIndex(index int) bool
 	checkElementIndex(index int) error
 	Set(index int, element interface{}) (o interface{}, err error)
 	unlink(x *Node) (element interface{})
 	Remove(o interface{}) bool
 	Size() (index int)
 	indexOf(o interface{}) (index int)
+	Clear()
 	unlinkFirst() (o interface{})
 	unlinkLast() (o interface{})
 	Add(o interface{}) error
@@ -211,13 +212,13 @@ func (link *LinkedList) Set(index int, element interface{}) (o interface{}, err 
 }
 
 func (link *LinkedList) checkElementIndex(index int) error {
-	if !link.isElementIndex(index) {
+	if !link.IsElementIndex(index) {
 		return errors.New(" Constructs an IndexOutOfBoundsException")
 	}
 	return nil
 }
 
-func (link *LinkedList) isElementIndex(index int) bool {
+func (link *LinkedList) IsElementIndex(index int) bool {
 	if index >= 0 && index < link.size {
 		return true
 	}
@@ -264,4 +265,20 @@ func (link *LinkedList) linkBefore(element interface{}, node *Node) {
 		prev.next = newNode
 	}
 	link.size++
+}
+
+func (link *LinkedList) Clear() {
+	if link.size == 0 {
+		return
+	}
+	for x := link.first; x != nil; {
+		next := x.next
+		x.next = nil
+		x.item = nil
+		x.prev = nil
+		x = next
+	}
+	link.first = nil
+	link.last = nil
+	link.size = 0
 }

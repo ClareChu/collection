@@ -39,6 +39,7 @@ func TestLinkedList_Contains(t *testing.T) {
 	b := link.Contains(1)
 	assert.Equal(t, false, b)
 
+
 	err := link.Add(1)
 	assert.Equal(t, nil, err)
 

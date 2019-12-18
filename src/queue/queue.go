@@ -36,3 +36,7 @@ func (queue *Queue) Pop() (o interface{}, err error) {
 func (queue *Queue) GetSize() (index int) {
 	return queue.list.Size()
 }
+
+func (queue *Queue) Clear() {
+	queue.list.Clear()
+}
