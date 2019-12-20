@@ -1,15 +1,8 @@
-//+build wireinject
+package foobarbaz
 
-package main
+import "github.com/google/wire"
 
-import (
-	"github.com/google/wire"
-)
-
-func CreateConcatService() *ConcatService {
-	panic(wire.Build(
-		wire.Struct(new(Logger), "*"),
-		NewHttpClient,
-		NewConcatService,
-	))
+func initializeBaz() *Baz {
+	wire.Build(NewBar, NewBaz, NewFoo)
+	return &Baz{}
 }
