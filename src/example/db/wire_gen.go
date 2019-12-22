@@ -11,7 +11,7 @@ import (
 
 // Injectors from dbwire.go:
 
-func DataSourceInitialize() *DataSource {
-	dataSource := NewDataSource()
-	return dataSource
+func InitializeMysqlConnect() (*Data, error) {
+	data := NewData()
+	return data, nil
 }

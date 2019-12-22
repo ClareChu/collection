@@ -7,6 +7,10 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
+type Data struct {
+	DataSource *DataSource `json:"datasource" yaml:"datasource"`
+}
+
 type DataSource struct {
 	Host      string `json:"host" yaml:"host"`
 	Port      int    `json:"port" yaml:"port"`
@@ -18,34 +22,37 @@ type DataSource struct {
 	Loc       string `json:"loc" yaml:"loc"`
 }
 
-var MysqlConnectSet = wire.NewSet(NewMysqlConnect, DataSourceSet)
+type Connect struct {
+	DB *gorm.DB `json:"db"`
+}
+
+var ConnectSet = wire.NewSet(NewData)
 
 //NewMysqlConnect 新建mysql 的连接池
-func NewMysqlConnect(dataSource *DataSource) (db *gorm.DB, err error) {
+func (data *Data) Connect() (connect *Connect, err error) {
 	// 连接数据库的url user:password@/dbname?charset=utf8&parseTime=True&loc=Local
 	// user:password@(localhost)/dbname?charset=utf8&parseTime=True&loc=Local
-	mysql := fmt.Sprintf("%v:%v@(%v:%v)/%v?charset=%v&parseTime=%v&loc=%v", dataSource.Username,
-		dataSource.Password,
-		dataSource.Host,
-		dataSource.Port,
-		dataSource.DataBase,
-		dataSource.Charset,
-		dataSource.ParseTime,
-		dataSource.Loc)
-	db, err = gorm.Open("mysql", mysql)
+	mysql := fmt.Sprintf("%v:%v@(%v:%v)/%v?charset=%v&parseTime=%v&loc=%v",
+		data.DataSource.Username,
+		data.DataSource.Password,
+		data.DataSource.Host,
+		data.DataSource.Port,
+		data.DataSource.DataBase,
+		data.DataSource.Charset,
+		data.DataSource.ParseTime,
+		data.DataSource.Loc)
+	db, err := gorm.Open("mysql", mysql)
 	if err != nil {
 		// todo logging
 		return
 	}
-	return
+	return &Connect{DB: db}, nil
 	//defer db.Close()
 
 }
 
-var DataSourceSet = wire.NewSet(NewDataSource)
-
 // 初始化db 数据
 
-func NewDataSource() *DataSource {
-	return &DataSource{}
+func NewData() *Data {
+	return &Data{}
 }
