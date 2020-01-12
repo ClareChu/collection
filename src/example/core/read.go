@@ -2,7 +2,6 @@ package core
 
 import (
 	"fmt"
-	"github.com/ClareChu/collection/src/example/copiey"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
@@ -47,11 +46,9 @@ func (config *Config) ReadConfig() error {
 	return nil
 }
 
-func (config *Config) Marshal(o interface{}) {
-	toValue := yaml.Unmarshal(config.DefaultConfig, o)
-	fromValue := yaml.Unmarshal(config.ProfileConfig, o)
-	copiey.Copy(toValue, fromValue)
-
+func (config *Config) Marshal(o interface{}) (err error) {
+	err = yaml.Unmarshal(config.DefaultConfig, o)
+	return
 }
 
 func getProfileName(filename, profile string) string {
